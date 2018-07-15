@@ -12,8 +12,10 @@
         <nav class="sidebar-nav">
             <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="/">Home</a>
 
-            <a class="sidebar-nav-item" href="https://chirathr.com">Portfolio</a>
-            <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub</a>
+            <a class="sidebar-nav-item" href="https://chirathr.com" target="_blank">Portfolio</a>
+            <a class="sidebar-nav-item" href="{{ site.github.repo }}" target="_blank">GitHub</a>
+
+            <a class="sidebar-nav-item" href="https://chirathr.com/#about" target="_blank">About</a>
 
             {% comment %}
                 The code below dynamically generates a sidebar nav of pages with
