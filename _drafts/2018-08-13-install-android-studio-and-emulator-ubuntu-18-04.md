@@ -5,5 +5,3 @@ categories: Android Ubuntu
 tags: Android Studio KVM permission denied AVD ubuntu 18.04
 ---
 
-
-
