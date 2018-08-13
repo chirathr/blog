@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to fix Android Virtual Device error on Ubuntu 18.04
+title: How to fix KVM permission denied error on Ubuntu 18.04
 categories: Android Ubuntu
 tags: Android Studio KVM permission denied AVD manager ubuntu 18.04
 comments: true
