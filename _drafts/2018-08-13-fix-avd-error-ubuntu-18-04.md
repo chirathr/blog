@@ -11,7 +11,7 @@ comments: true
   on a fresh install of Ubuntu 18.04.
 </div>
 
-![placeholder](/public/images/2018-08-13-fix-avd-error-ubuntu-18-04/1.png "Error")
+![Error](/public/images/2018-08-13-fix-avd-error-ubuntu-18-04/1.png "Error")
 
 The error message also shows a hint on what could be wrong: `Grant current user access to /dev/kvm.` A quick google search reveals that this is a common problem.
 
@@ -36,8 +36,8 @@ And then own the file /dev/kvm using chown.
 $ sudo chown <username> /dev/kvm
 {% endhighlight %}
 
-![placeholder](/public/images/2018-08-13-fix-avd-error-ubuntu-18-04/2.png "Fix error")
+![Fix error](/public/images/2018-08-13-fix-avd-error-ubuntu-18-04/2.png "Fix error")
 
 After the above steps the AVD should work as expected.
 
-![placeholder](/public/images/2018-08-13-fix-avd-error-ubuntu-18-04/3.png "Android boots")
+![Android emulator boots](/public/images/2018-08-13-fix-avd-error-ubuntu-18-04/3.png "Android emulator boots")
