@@ -6,10 +6,10 @@ tags: Android Studio ubuntu 18.04
 comments: true
 ---
 
-Learning Android app development was one of the things I always wanted to do. So after graduating college was over 
-I decided to learn Android, build an app and publish it in the Google Play Store. The first step in leaning Android 
-app development is to setup the Android Studio IDE. Thankfully installing Android Studio on Ubuntu 18.04 is pretty 
-simple and you don't have to bother with installation of any drivers.
+Learning Android app development was one of the things I always wanted to do. So after graduation I was determined to 
+learn Android app development, build an app and publish it in the Google Play Store. The first step in learning 
+Android app development is to setup the Android Studio IDE. Installing Android Studio on Ubuntu 18.04 is pretty 
+straight forward and the best thing is you don't need to bother with installation of any adb driver.
 
 ![Download Android Studio](/public/images/2018-08-14-install-android-studio/android-studio-1.jpg "Download Android Studio")
 Download Android Studio from [developer.android.com](https://developer.android.com/studio/).
