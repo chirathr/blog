@@ -6,8 +6,6 @@ tags: Android Lifecycle activities onCreate onStart onResume onPause onStop onDe
 comments: true
 ---
 
-![Activity life cycle](/public/images/2018-08-15-understanding-activities-lifecycles/acitivy-lifecycle.png)
-
 <div class="message">
   An activity is similar to a webpage in a sense that it has both a layout(UI) and logic.
 </div>
@@ -27,10 +25,12 @@ Every activity goes through a set of states during it's life called life cycles 
 corresponding callback methods in your activity class when the app goes through it's lifecycles. 
 These callbacks are provided by the `Activity` class.
 
+![Activity life cycle](/public/images/2018-08-15-understanding-activities-lifecycles/acitivy-lifecycle.png)
+
 When an application starts the `onCreate()` method is called, followed by the `onStart()` and `onResume()` methods.
 The app becomes visible now and when you minimize the app, methods `onPause()` and `onStop()` are called. 
 From the stopped state, the activity either comes back to interact with the user, or the activity is finished 
-running and goes away after calling `onDestroy()` method. If the activity comes back, the system invokes 
+running and goes away after calling `onDestroy()` method. If the activity comes back, the system invokes the 
 `onRestart()` method. The `onDestroy()` method is called when the app is force closed by the user or the when 
 the system kills the app to reclaim memory.
 
