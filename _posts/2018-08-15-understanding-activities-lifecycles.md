@@ -2,7 +2,7 @@
 layout: post
 title: Understanding Android Activities and LifeCycles
 categories: Android
-tags: Android Lifecycle activities onCreate onStart onResume onPause onStop onDestroy
+tags: 'Android, Lifecycle, activities, onCreate, onStart, onResume, onPause, onStop, onDestroy'
 comments: true
 ---
 

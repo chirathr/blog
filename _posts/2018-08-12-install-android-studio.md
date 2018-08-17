@@ -2,7 +2,7 @@
 layout: post
 title: Installing Android Studio in Ubuntu 18.04
 categories: Android Ubuntu
-tags: Android Studio ubuntu 18.04
+tags: Android, Studio, Ubuntu, 18.04
 comments: true
 ---
 
