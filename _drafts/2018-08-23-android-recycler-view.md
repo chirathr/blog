@@ -198,7 +198,12 @@ The ViewHolder will be used to cache the the view objects, this improves the per
 of `findViewById` each time the user scrolls.
 
 {% highlight java %}
-// View holder class whose objects represent each list item in the recycler view
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+
+    private List<DataModel> dataModelList;
+    private Context mContext;
+
+    // View holder class whose objects represent each list item
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView cardImageView;
         public TextView titleTextView;
@@ -232,12 +237,14 @@ Create a constructor that takes in a List of DataModel objects. This list will b
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private List<DataModel> dataModelList;
+    private Context mContext;
 
-    // View holder class whose objects represent each list item in the recycler view
+    // View holder class whose objects represent each list item
     public static class MyViewHolder extends RecyclerView.ViewHolder {...}
 
-    public MyAdapter(List<DataModel> modelList) {
+    public MyAdapter(List<DataModel> modelList, Context context) {
         dataModelList = modelList;
+        mContext = context;
     }
 
     @NonNull
@@ -253,7 +260,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         // Bind data for the item at position
-        holder.bindData(dataModelList.get(position));
+        holder.bindData(dataModelList.get(position), mContext);
     }
 
     @Override
@@ -266,3 +273,43 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 ### Set the RecyclerView in the activity.
 
+{% highlight java %}
+
+public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mRecyclerView = findViewById(R.id.recycler_view);
+
+        List<DataModel> dataModelList = new ArrayList<>();
+        for (int i = 1; i <= 20; ++i) {
+            dataModelList.add(new DataModel(i));
+        }
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter and pass in our data model list
+        mAdapter = new MyAdapter(dataModelList, this);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+}
+
+{% endhighlight %}
+
+
+##### Final Layout
+
+<img src="/public/images/2018-08-23-android-recycler-view/recycler_view.png" alt="Card List Item" style="border: 1px solid #e8e8e8; margin-top: 20px" width="350px"/>
