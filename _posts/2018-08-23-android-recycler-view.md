@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Android - List of Cards using RecyclerView
+title: Android - Creating a List of Cards using RecyclerView
 categories: Android
 tags: Android, Cards, Material Card, List, RecyclerView, Adapter, ViewHolder
 comments: true
@@ -9,13 +9,21 @@ comments: true
 ![RecyclerView](/public/images/2018-08-23-android-recycler-view/main_image.jpg)
 
 <div class="message">
-    RecyclerView is used to display a scrolling list of elements based on a large data set or data that 
+    A <strong>RecyclerView</strong> is used to display a scrolling list of items based on a large data set or data that 
     changes frequently.  
 </div>
 
+Code for the this tutorial is available on my [GitHub](https://github.com/chirathr/RecyclerView_MaterialCard_Example).
+
+In the `RecyclerView` model, several components work together to display a scrolling list. We add a 
+`RecyclerView` object that acts as the container for the list of items. As a beginner to Android development, it was hard
+for me to wrap my head around all the components that makes RecyclerView possible. So, this guide aims to help 
+anyone display a list of items using `RecyclerView` and `MaterialComponents`.
+
 ### Add the support library for RecyclerView and MaterialDesign.
 
-To Access RecyclerView and MaterialCard we need the v7 support library and the material design library.
+To access `RecyclerView` and `MaterialComponents` we need the v7 support library and the material design library. 
+Open the `build.gradle` file and add the following dependencies.
 
 {% highlight bash %}
 dependencies {
@@ -32,24 +40,27 @@ dependencies {
 
 ### Inherit app theme from MaterialComponents
 
+To use the latest material design components in your app the base theme should inherit from the theme provided by `MaterialComponents`.
 Change the parent of you main `AppTheme` to `Theme.MaterialComponents.Light.DarkActionBar` in your `styles.xml`.
 
-{% highlight xml %}
+##### styles.xml
 
+{% highlight xml %}
 <!-- Base application theme. -->
 <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-    <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
 </style>
-
 {% endhighlight %}
 
-### Add RecyclerView to layout
+### Add RecyclerView to your layout file
+
+The `RecyclerView` widget should be added to your activity layout file.
+
+##### activity_main.xml
 
 {% highlight xml %}
-
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,6 +70,7 @@ Change the parent of you main `AppTheme` to `Theme.MaterialComponents.Light.Dark
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    // Recycler View widget
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -66,18 +78,19 @@ Change the parent of you main `AppTheme` to `Theme.MaterialComponents.Light.Dark
         android:scrollbars="vertical"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
 {% endhighlight %}
 
 ### Create the layout for a single card list item
 
-We will create the layout for each card list item in the `list_item.xml` file. Here the `MaterialCardView`
-and `MaterialButton` is used to create the layout.
+We need to create the layout for a single card item in a new layout file: `list_item.xml`. This card layout will be repeated 
+to display the list of cards. Here `MaterialCardView` and `MaterialButtons` are used to create the layout.
 
 ##### A single list item
 
 <img src="/public/images/2018-08-23-android-recycler-view/list-item.png" alt="Card List Item" style="border: 1px solid #e8e8e8; margin-top: 20px" width="350px"/>
 
+Modify the `cardCornerRadius` and `cardElevation` attributes in the `MaterialCardView` to change the corner radius and shadow of the card.
+I used the styles provided by `MaterialComponents`, for example the button above has a style of `Widget.MaterialComponents.Button.TextButton`.
 ##### list_item.xml
 
 {% highlight xml %}
@@ -162,7 +175,7 @@ and `MaterialButton` is used to create the layout.
 
 ### Create a simple data model
 
-We will create a simple class that will hold the data for each of the Card list items.
+We will create a simple class that will hold the data for each and every card list item.
 
 {% highlight java %}
 public class DataModel {
@@ -193,9 +206,11 @@ public class DataModel {
 
 ### Create the View Holder
 
-Inside your Adapter class create a public static `ViewHolder` class that extents `RecyclerView.ViewHolder`.
-The ViewHolder will be used to cache the the view objects, this improves the performance as it reduces the expensice task 
-of `findViewById` each time the user scrolls.
+Inside your Adapter create a static `ViewHolder` class that extents `RecyclerView.ViewHolder`.
+The `ViewHolder` will be used to cache the the view objects associated with each list item. The `RecyclerView` creates 
+as many `ViewHolders` as required to fill the screen plus a couple of extra in case the user scrolls. 
+When the user scrolls, the `ViewHolder` at the top that goes out of the window is bind with new data and is the shown 
+at the bottom.
 
 {% highlight java %}
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -224,14 +239,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 {% endhighlight %}
 
-Here we have a ImageView and two TextViews which we will use to update the Image, Title and subtitle.
+Here we have an `ImageView` and two `TextViews` that display the card image, title and subtitle. The constructor
+uses `findViewById` to get a reference to the widgets in the layout file. We have an addition function `bindData()`
+ that takes a `DataModel` and binds the correct data in the `ImageView` and `TextView`.
 
 ### Complete the List Adapter
 
 The `MyAdapter` class should extend `RecyclerView.Adapter` and we need to override the functions 
 `onCreateViewHolder()`, `onBindViewHolder()` and `getItemCount()`.
 
-Create a constructor that takes in a List of DataModel objects. This list will be used to populate our RecyclerView.
+The constructor takes a list of `DataModel` and the activities context. This list will be used to populate our `RecyclerView`.
+The `onCreateViewHolder()` function is called when the `RecyclerView` creates the required number of `ViewHolders`. Here we 
+inflate a new `list_item` layout and use it to return a new `ViewHolder`.
+
+The `onBindViewHolder()` is used to bind data to an existing `ViewHolder`. Since we already have a bind method 
+in our `ViewHolder` class, we can user that to set the correct data. The position variable will have the index of the 
+item the `RecyclerView` wants to load.
 
 {% highlight java %}
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -272,6 +295,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 {% endhighlight %}
 
 ### Set the RecyclerView in the activity.
+
+The last step is to get a reference to the `RecyclerView` and set the layout manager and our adapter.
 
 {% highlight java %}
 
