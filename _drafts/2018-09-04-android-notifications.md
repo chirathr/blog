@@ -6,6 +6,8 @@ tags: Android, Creating, Notification, Builder, Manager, Service
 comments: true
 ---
 
+![Create notification](/public/images/android-notifications/notifcation_poster.png)
+
 <div class="message">
     Notifications are an important way to display information when your app is not being used.  
 </div>
@@ -53,7 +55,7 @@ channels instead of all notifications for an application.
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
     CharSequence name = getString(R.string.channel_name);
     String description = getString(R.string.channel_description);
-    int importance = NotificationManager.IMPORTANCE_DEFAULT;
+    int importance = NotificationManager.IMPORTANCE_HIGH;
     NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
     channel.setDescription(description);
     // Register the channel with the system; you can't change the importance or other notification behaviors after this
@@ -116,6 +118,8 @@ if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
 notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
 {% endhighlight %}
 
-<img src="/public/images/android-notifications/notifcation_frame.png" alt="Notification" style="margin: 10px" width="400px"/>
+<img src="/public/images/android-notifications/notifcation_frame.png" alt="Notification" style="margin: 10px" width="350px"/>
 
-More info about notifications can be found at [developer.android.com](https://developer.android.com/guide/topics/ui/notifiers/notifications).
+Now when the app opens, a notification should popup like above.
+
+More info about creating Android notifications can be found at [developer.android.com](https://developer.android.com/guide/topics/ui/notifiers/notifications).
