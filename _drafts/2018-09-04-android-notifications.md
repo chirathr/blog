@@ -42,8 +42,26 @@ NotificationManager notificationManager =
 To show a notification in Android Oreo and above we need to create a notification channel. A user can disable notification
 channels instead of all notifications for an app.
 
-Next we will create the notification using the NotificationCompat.Builder and set the notification's content and channel.
+{% highlight java %}
 
+// Create the NotificationChannel, but only on API 26+ because
+// the NotificationChannel class is new and not in the support library
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    CharSequence name = getString(R.string.channel_name);
+    String description = getString(R.string.channel_description);
+    int importance = NotificationManager.IMPORTANCE_DEFAULT;
+    NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+    channel.setDescription(description);
+    // Register the channel with the system; you can't change the importance
+    // or other notification behaviors after this
+    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+    notificationManager.createNotificationChannel(channel);
+}
+
+{% endhighlight %}
+
+Next we will create the notification using the NotificationCompat.Builder and set the notification's content and channel.
+    
 {% highlight java %}
 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
         .setSmallIcon(R.drawable.notification_icon)
