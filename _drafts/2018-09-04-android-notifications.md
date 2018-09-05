@@ -19,7 +19,6 @@ information like communication from other people, reminders and other timely inf
 
 <img src="/public/images/android-notifications/notification-callouts_2x.png" alt="natification layout" style="padding: 20px 0;" width="500px"/>
 
-
 The most common parts of a notification are indicated in figure above as follows:
 
 1. **Small icon:** This is required and set with `setSmallIcon()`.
@@ -28,7 +27,6 @@ The most common parts of a notification are indicated in figure above as follows
 4. **Large icon:** This is optional (usually used only for contact photos; do not use it for your app icon) and set with `setLargeIcon()`.
 5. **Title:** This is optional and set with `setContentTitle()`.
 6. **Text:** This is optional and set with `setContentText()`.
-
 
 ### Creating a notification
 
@@ -62,17 +60,24 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
     NotificationManager notificationManager = getSystemService(NotificationManager.class);
     notificationManager.createNotificationChannel(channel);
 }
-
 {% endhighlight %}
+
+Setting the importance to `IMPORTANCE_HIGH` will make the notification pop up as a `Heads-up notification`.
+
+<img src="/public/images/android-notifications/notifcation_heads_up.png" alt="Heads-up notification" width="400px"/>
+
 
 ##### Load Bitmap image for Large Icon
 
+We can also include a large icon in the notification, but it needs to be of type Bitmap.
 
 {% highlight java %}
 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.profile_pic);
 {% endhighlight %}
 
 ##### Create a pending Intent
+
+Here we create a `PendingIntent` that is used by the notification manger to launch the `MainActivity` of the app.
 
 {% highlight java %}
 Intent startActivityIntent = new Intent(this, MainActivity.class);
@@ -87,7 +92,7 @@ PendingIntent pendingIntent = PendingIntent.getActivity(
 
 ##### Build the notification
 
-Next we will create the notification using the NotificationCompat.Builder and set the notification's content and channel.
+Next we will create the notification using the `NotificationCompat.Builder` and set the notification's content and channel.
     
 {% highlight java %}
 
@@ -104,6 +109,7 @@ NotificationCompat.Builder notificationBuilder =
 {% endhighlight %}
 
 
+
 ##### Set notification priority
 
 {% highlight java %}
@@ -118,7 +124,7 @@ if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
 notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
 {% endhighlight %}
 
-<img src="/public/images/android-notifications/notifcation_frame.png" alt="Notification" style="margin: 10px" width="350px"/>
+<img src="/public/images/android-notifications/notification_frame.png" alt="Notification" width="400px"/>
 
 Now when the app opens, a notification should popup like above.
 
