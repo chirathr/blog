@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Creating notification on Android
+title: Creating notifications on Android
 categories: Android
 tags: Android, Creating, Notification, Builder, Manager, Service
 comments: true
