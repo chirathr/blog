@@ -12,10 +12,10 @@ comments: true
     Notifications are an important way to display information when your app is not being used.  
 </div>
 
-Code for the this tutorial is available on my [GitHub](https://github.com/chirathr/Android_Example_Repo).
-
 A notification is a message that is shown outside of an application window by the android system to inform the user about 
 information like communication from other people, reminders and other timely information. 
+
+Code for the this tutorial is available on my [GitHub](https://github.com/chirathr/Android_Example_Repo).
 
 ### Notification layout
 
@@ -32,7 +32,7 @@ The most common parts of a notification are indicated in figure above as follows
 
 ### Creating a notification
 
-Creating a basic notification in Android is pretty simple. The first step is to get the notification manger service 
+Creating a basic notification for Android is pretty simple. The first step is to get the notification manger service 
 which is the system service that handles notifications.
 
 ##### Notification manager service
@@ -46,8 +46,8 @@ NotificationManager notificationManager =
 
 ##### Notification channels
 
-To show a notification in Android Oreo and above we need to create a notification channel. A user can disable notification
-channels instead of all notifications for an application.
+To show a notification in Android Oreo and above we need to create a notification channel. A user can disable or
+ fine tune the visual and auditory options for each channel separately.
 
 <img src="/public/images/android-notifications/notification_channel.png" alt="Heads-up notification" width="400px"/>
 
@@ -56,13 +56,15 @@ channels instead of all notifications for an application.
 
 // Create the NotificationChannel, but only on API 26+ because the NotificationChannel class is new and not in the support library
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-    CharSequence name = getString("My notification channel");
-    String description = getString("Notification channel description");
+    CharSequence name = "My notification channel";
+    String description = "Notification channel description";
     int importance = NotificationManager.IMPORTANCE_HIGH;
-    NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+    NotificationChannel channel = new NotificationChannel(
+                                    CHANNEL_ID, name, importance);
     channel.setDescription(description);
     // Register the channel with the system; you can't change the importance or other notification behaviors after this
-    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+    NotificationManager notificationManager = getSystemService(
+                                                NotificationManager.class);
     notificationManager.createNotificationChannel(channel);
 }
 {% endhighlight %}
@@ -79,7 +81,7 @@ Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.profi
 
 ##### Create a pending Intent
 
-Here we create a `PendingIntent` that is used by the notification manger to launch the `MainActivity` of the app.
+Here we create a `PendingIntent` that is used by the notification manger to launch the app when the notification is clicked.
 
 {% highlight java %}
 Intent startActivityIntent = new Intent(this, MainActivity.class);
@@ -105,15 +107,16 @@ NotificationCompat.Builder notificationBuilder =
             .setLargeIcon(largeIcon)
             .setContentTitle("Hi there!")
             .setContentText("Message from Chirath")
-            .setDefaults(Notification.DEFAULT_VIBRATE)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true);   // close the notification on click
 {% endhighlight %}
 
+`setAutoCancel(true)` will dismiss the notification when user clicks on it.
+
 ##### Set notification priority
 
-We had already set the priority as high when we created the notification channel. But notification channels are supported
-by devices running Oreo and above. So for the other devices we need to set the priority as `PRIORITY_HIGH`.
+We had already set the priority as high when we created the notification channel. But notification channels are not supported
+by devices running Nougat and below. So for these devices we need to set the priority using the `setPriority()` method.
 
 {% highlight java %}
 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
@@ -123,8 +126,8 @@ if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
 
 ##### Show the notification
 
-The last step is to call the notify method and pass in unique id and the result of the 
-`NotificationCompat.Builder.build()` method.
+The last step is to call the notify method and pass in unique id and the result of  
+`NotificationCompat.Builder.build()`.
 
 {% highlight java %}
 notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
