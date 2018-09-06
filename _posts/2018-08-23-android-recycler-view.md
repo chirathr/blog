@@ -13,7 +13,7 @@ comments: true
     changes frequently.  
 </div>
 
-Code for the this tutorial is available on my [GitHub](https://github.com/chirathr/RecyclerView_MaterialCard_Example).
+Code for the this tutorial is available on my [GitHub](https://github.com/chirathr/Android_Example_Repo).
 
 In the `RecyclerView` model, several components work together to display a scrolling list. We add a 
 `RecyclerView` object that acts as the container for the list of items. As a beginner to Android development, it was hard

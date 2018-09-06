@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Creating notification in Android
+title: Creating notification on Android
 categories: Android
 tags: Android, Creating, Notification, Builder, Manager, Service
 comments: true
@@ -12,7 +12,9 @@ comments: true
     Notifications are an important way to display information when your app is not being used.  
 </div>
 
-A notification is a message that is shown outside an application window by the android system to inform the user about 
+Code for the this tutorial is available on my [GitHub](https://github.com/chirathr/Android_Example_Repo).
+
+A notification is a message that is shown outside of an application window by the android system to inform the user about 
 information like communication from other people, reminders and other timely information. 
 
 ### Notification layout
@@ -47,12 +49,15 @@ NotificationManager notificationManager =
 To show a notification in Android Oreo and above we need to create a notification channel. A user can disable notification
 channels instead of all notifications for an application.
 
+<img src="/public/images/android-notifications/notification_channel.png" alt="Heads-up notification" width="400px"/>
+
+
 {% highlight java %}
 
 // Create the NotificationChannel, but only on API 26+ because the NotificationChannel class is new and not in the support library
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-    CharSequence name = getString(R.string.channel_name);
-    String description = getString(R.string.channel_description);
+    CharSequence name = getString("My notification channel");
+    String description = getString("Notification channel description");
     int importance = NotificationManager.IMPORTANCE_HIGH;
     NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
     channel.setDescription(description);
@@ -63,9 +68,6 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 {% endhighlight %}
 
 Setting the importance to `IMPORTANCE_HIGH` will make the notification pop up as a `Heads-up notification`.
-
-<img src="/public/images/android-notifications/notifcation_heads_up.png" alt="Heads-up notification" width="400px"/>
-
 
 ##### Load Bitmap image for Large Icon
 
@@ -108,9 +110,10 @@ NotificationCompat.Builder notificationBuilder =
             .setAutoCancel(true);   // close the notification on click
 {% endhighlight %}
 
-
-
 ##### Set notification priority
+
+We had already set the priority as high when we created the notification channel. But notification channels are supported
+by devices running Oreo and above. So for the other devices we need to set the priority as `PRIORITY_HIGH`.
 
 {% highlight java %}
 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
@@ -119,6 +122,9 @@ if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
 {% endhighlight %}
 
 ##### Show the notification
+
+The last step is to call the notify method and pass in unique id and the result of the 
+`NotificationCompat.Builder.build()` method.
 
 {% highlight java %}
 notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
