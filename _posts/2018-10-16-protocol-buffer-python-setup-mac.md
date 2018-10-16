@@ -53,6 +53,14 @@ $ which protoc
 $ protoc --version
 ```
 
+### Install Python Packages
+
+To use the generated classes in your code, we need a couple of Python packages.
+
+```bash
+pip install google protobuf
+```
+
 ### Next step
 
 Go through the [Protocol Buffer Basics: Python](https://developers.google.com/protocol-buffers/docs/pythontutorial) tutorial from google.
