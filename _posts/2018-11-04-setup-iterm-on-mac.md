@@ -8,7 +8,7 @@ comments: true
 
 ![iTerm2 with ZSH](/public/images/setup-iterm-on-mac/1.png)
 
-iTerm2 is an OpenSource replacement for apples Terminal. It is highly customisable and has a lot of useful features.
+iTerm2 is an OpenSource replacement for apples Terminal. It is highly customisable and has a lot of useful features. This is a getting started guide for anyone new to MacOS and in general development.
 
 ### Install Iterm2
 
@@ -16,7 +16,7 @@ Download and install the latest version of iTerm2 from [iterm2.com](https://iter
 
 ### Install Zsh
 
-Zsh is one of the most popular shells that you can install. `zsh` includes many useful features for both the beginner and advanced CLI user not available in bash. It also includes support for autocomplete and plugins. Install `zsh` using the `brew` command.
+Zsh is one of the most popular shells that you can install. `zsh` includes many useful features for both the beginner and advanced CLI user. It also includes support for autocomplete and plugins. Install `zsh` using the `brew` command.
 
 ```bash
 brew install zsh
@@ -24,11 +24,11 @@ brew install zsh
 
 ### Install Oh My ZSH
 
+`On My Zsh` is a community driven framework to manage `zsh` configurations. It comes bundled with a ton of helpful functions, helpers, plugins and themes.
+
 Install Oh My ZSH by following the instructions from the [ohmyz.sh](https://ohmyz.sh/) website.
 
-### Use a Oh My ZSH theme
-
-`On My Zsh` is a community driven framework to manage `zsh` configurations. It comes bundled with a ton of helpful functions, helpers, plugins and themes.
+### Use an Oh My ZSH theme
 
 Check out the various [themes](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes) provided by Oh My ZSH.
 
@@ -44,6 +44,8 @@ Set the theme that you want. Here I am setting it to `avit`.
 
 ### Configure shortcuts
 
+iTerm2 lets you configure shortcuts. Here are some of the shortcuts that I find useful.
+
 To configure shortcuts:
 
 - Open iTerm2
@@ -52,8 +54,6 @@ To configure shortcuts:
 - Add the following Shortcut Keys
 
 ![Move cursor one word left](/public/images/setup-iterm-on-mac/3.png)
-
-These are some of the shortcuts I find useful:
 
 #### Move cursor one word left
 
@@ -97,4 +97,4 @@ These are some of the shortcuts I find useful:
 - Action: Send Hex Code
 - Code: 0x1f
 
-Check [this](https://stackoverflow.com/questions/6205157/iterm-2-how-to-set-keyboard-shortcuts-to-jump-to-beginning-end-of-line) answer StackOverFlow for more details.
+Check [this](https://stackoverflow.com/questions/6205157/iterm-2-how-to-set-keyboard-shortcuts-to-jump-to-beginning-end-of-line) StackOverFlow answer for more details.
