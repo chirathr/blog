@@ -1,6 +1,6 @@
 ---
 layout: post
-title: iTerm2 + Oh My ZSH equals a better Terminal
+title: iTerm2 + Oh My ZSH => a better Terminal
 categories: Mac OS
 tags: Mac OS
 comments: true
