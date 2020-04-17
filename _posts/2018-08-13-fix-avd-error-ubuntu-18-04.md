@@ -29,15 +29,10 @@ Use the adduser command to add your user to the kvm group.
 $ sudo adduser <username> kvm
 {% endhighlight %}
 
-
-And then own the file /dev/kvm using chown.
-
-{% highlight bash %}
-$ sudo chown <username> /dev/kvm
-{% endhighlight %}
-
-![Fix error](/public/images/2018-08-13-fix-avd-error-ubuntu-18-04/2.png "Fix error")
+And then logout/login or restart your system.
 
 After the above steps the AVD should work as expected.
 
 ![Android emulator boots](/public/images/2018-08-13-fix-avd-error-ubuntu-18-04/3.png "Android emulator boots")
+
+Update: I have removed the very bad approach of running `sudo chown <username> /dev/kvm`. Thank you to all the people who had pointed it out in the comments :)
